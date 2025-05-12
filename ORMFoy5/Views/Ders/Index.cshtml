@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ORMFoy5.Models.Ders>
+
+@{
+    ViewBag.Title = "Ders Listesi";
+}
+
+<h2>Ders Listesi</h2>
+
+<p>
+    @Html.ActionLink("Yeni Ders Ekle", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Ders Adı
+        </th>
+        <th>
+            İşlemler
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DersAd)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.DersID }) |
+                @Html.ActionLink("Detaylar", "Details", new { id = item.DersID }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.DersID })
+            </td>
+        </tr>
+    }
+</table>

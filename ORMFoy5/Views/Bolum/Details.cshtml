@@ -1,0 +1,27 @@
+﻿@model ORMFoy5.Models.Bolum
+
+@{
+    ViewBag.Title = "Bölüm Detayları";
+}
+
+<h2>Bölüm Detayları</h2>
+
+@if (Model == null)
+{
+    <p>Hata: Bölüm bulunamadı.</p>
+    <div>
+        @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}
+else
+{
+    <div>
+        <p><strong>Bölüm Adı:</strong> @Html.DisplayFor(model => model.BolumAd)</p>
+        <p><strong>Fakülte:</strong> @Html.DisplayFor(model => model.Fakulte.FakulteAd)</p>
+    </div>
+
+    <div>
+        @Html.ActionLink("Düzenle", "Edit", new { id = Model.BolumID }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}

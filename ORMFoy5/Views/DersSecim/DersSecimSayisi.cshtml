@@ -1,0 +1,42 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewBag.Title = "Ders Seçim Sayısı";
+}
+
+<h2>Ders Seçim Sayısı</h2>
+
+@using (Html.BeginForm("Index", "DersSecim", FormMethod.Get))
+{
+    <div class="form-group">
+        <label>Yıl:</label>
+        <input type="text" name="yil" class="form-control" placeholder="örn: 2023" />
+
+        <label>Yarıyıl:</label>
+        <input type="text" name="yariyil" class="form-control" placeholder="örn: Güz veya Bahar" />
+
+        <br />
+        <input type="submit" value="Listele" class="btn btn-primary" />
+    </div>
+}
+
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>Ders Adı</th>
+            <th>Seçen Öğrenci Sayısı</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DersAdi</td>
+                <td>@item.SecenOgrenciSayisi</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Lütfen yıl ve yarıyıl seçerek sorgu yapınız.</p>
+}

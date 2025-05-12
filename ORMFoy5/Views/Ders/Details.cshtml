@@ -1,0 +1,25 @@
+﻿@model ORMFoy5.Models.Ders
+
+@{
+    ViewBag.Title = "Ders Detayları";
+}
+
+<h2>Ders Detayları</h2>
+
+@if (Model == null)
+{
+    <p>Hata: Ders bulunamadı.</p>
+    @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+}
+else
+{
+    <div>
+        <p><strong>Ders Adı:</strong> @Html.DisplayFor(model => model.DersAd)</p>
+        <p><strong>Bölüm:</strong> @Html.DisplayFor(model => model.Bolum.BolumAd)</p>
+    </div>
+
+    <div>
+        @Html.ActionLink("Düzenle", "Edit", new { id = Model.DersID }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}

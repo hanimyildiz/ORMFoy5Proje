@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ORMFoy5.Models.OgrenciDers>
+
+@{
+    ViewBag.Title = "Öğrenci Ders Listesi";
+}
+
+<h2>Öğrenci Ders Listesi</h2>
+
+<p>
+    @Html.ActionLink("Yeni Atama Ekle", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Öğrenci</th>
+        <th>Ders</th>
+        <th>Yıl</th>
+        <th>Yarıyıl</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Ogrenci.Ad</td>
+            <td>@item.Ders.DersAd</td>
+            <td>@item.Yil</td>
+            <td>@item.Yariyil</td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.OgrenciDersID }) |
+                @Html.ActionLink("Detaylar", "Details", new { id = item.OgrenciDersID }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.OgrenciDersID })
+            </td>
+        </tr>
+    }
+</table>

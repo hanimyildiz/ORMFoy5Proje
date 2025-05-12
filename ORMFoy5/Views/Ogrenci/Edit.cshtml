@@ -1,0 +1,34 @@
+﻿@model ORMFoy5.Models.Ogrenci
+
+<h2>Öğrenci Düzenle</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.OgrenciID)
+
+    <div>
+        <div>
+            @Html.LabelFor(model => model.Ad)
+            @Html.EditorFor(model => model.Ad)
+            @Html.ValidationMessageFor(model => model.Ad)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Soyad)
+            @Html.EditorFor(model => model.Soyad)
+            @Html.ValidationMessageFor(model => model.Soyad)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.BolumID)
+            @Html.DropDownList("BolumID", null, "-- Seçiniz --")
+            @Html.ValidationMessageFor(model => model.BolumID)
+        </div>
+        <div>
+            <input type="submit" value="Kaydet" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</div>

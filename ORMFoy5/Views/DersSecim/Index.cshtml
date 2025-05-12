@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ORMFoy5.Controllers.DersSecim>
+
+@{
+    ViewBag.Title = "Ders Seçim Listesi";
+}
+
+<h2>Ders Seçim Listesi</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Öğrenci Ders Listesi</h3>
+        @using (Html.BeginForm("Index", "DersSecim", FormMethod.Get))
+        {
+            <div class="form-group">
+                <label>Öğrenci No:</label>
+                <input type="number" name="ogrenciID" class="form-control" placeholder="Öğrenci ID girin" />
+                <br />
+                <input type="submit" value="Listele" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+    <div class="col-md-6">
+        <h3>Ders Seçim Sayısı</h3>
+        @using (Html.BeginForm("Index", "DersSecim", FormMethod.Get))
+        {
+            <div class="form-group">
+                <label>Yıl:</label>
+                <input type="text" name="yil" class="form-control" placeholder="örn: 2023" />
+                <label>Yarıyıl:</label>
+                @Html.DropDownList("yariyil", new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Güz", Value = "Güz" },
+                    new SelectListItem { Text = "Bahar", Value = "Bahar" }
+                }, "-- Seçiniz --", new { @class = "form-control" })
+                <br />
+                <input type="submit" value="Listele" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    var firstItem = Model.FirstOrDefault();
+    if (firstItem != null && firstItem.SecenOgrenciSayisi.HasValue)
+    {
+        <h3>Ders Seçim Sayıları</h3>
+        <table class="table">
+            <tr>
+                <th>Ders Adı</th>
+                <th>Seçen Öğrenci Sayısı</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DersAdi</td>
+                    <td>@item.SecenOgrenciSayisi</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h3>Öğrencinin Aldığı Dersler</h3>
+        <table class="table">
+            <tr>
+                <th>Ders Adı</th>
+                <th>Yıl</th>
+                <th>Yarıyıl</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DersAdi</td>
+                    <td>@item.Yil</td>
+                    <td>@item.Yariyil</td>
+                </tr>
+            }
+        </table>
+    }
+}
+else
+{
+    <p>Lütfen bir öğrenci numarası veya yıl-yarıyıl bilgisi girerek sorgu yapınız.</p>
+}

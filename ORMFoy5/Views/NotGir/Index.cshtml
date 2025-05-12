@@ -1,0 +1,61 @@
+﻿@using System.Web.Mvc
+@using System.Web.Helpers
+@using System.Linq
+
+@model IEnumerable<ORMFoy5.Models.OgrenciDers>
+
+@{
+    ViewBag.Title = "Not Girişi";
+}
+
+<h2>Not Girişi</h2>
+
+@using (Html.BeginForm("Index", "NotGir", FormMethod.Get))
+{
+    <div class="form-group">
+        <label>Ders Seç:</label>
+        @Html.DropDownList("dersID", (SelectList)ViewBag.Dersler, "-- Ders Seçiniz --", new { @class = "form-control", onchange = "this.form.submit()" })
+    </div>
+}
+
+@if (Request.QueryString["dersID"] != null)
+{
+    if (Model.Any())
+    {
+        <form method="post" action="@Url.Action("KaydetNotlar", "NotGir")">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="dersID" value="@Request.QueryString["dersID"]" />
+            <table class="table">
+                <tr>
+                    <th>Öğrenci Adı</th>
+                    <th>Vize Notu</th>
+                    <th>Final Notu</th>
+                </tr>
+                @{ int index = 0; }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Ogrenci.Ad</td>
+                        <td>
+                            <input type="hidden" name="ogrenciDersID[@index]" value="@item.OgrenciDersID" />
+                            <input type="number" name="vizeNotu[@index]" value="@item.VizeNotu" class="form-control" min="0" max="100" />
+                        </td>
+                        <td>
+                            <input type="number" name="finalNotu[@index]" value="@item.FinalNotu" class="form-control" min="0" max="100" />
+                        </td>
+                    </tr>
+                    index++;
+                }
+            </table>
+            <input type="submit" value="Notları Kaydet" class="btn btn-primary" />
+        </form>
+    }
+    else
+    {
+        <p>Seçilen derse kayıtlı öğrenci bulunamadı. Lütfen önce bir öğrenci için ders ataması yapın.</p>
+    }
+}
+else
+{
+    <p>Lütfen bir ders seçiniz.</p>
+}

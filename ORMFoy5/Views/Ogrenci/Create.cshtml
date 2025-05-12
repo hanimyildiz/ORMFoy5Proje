@@ -1,0 +1,37 @@
+﻿@model ORMFoy5.Models.Ogrenci
+
+<h2>Yeni Öğrenci Ekle</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <div>
+            @Html.LabelFor(model => model.Ad)
+            @Html.EditorFor(model => model.Ad)
+            @Html.ValidationMessageFor(model => model.Ad)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Soyad)
+            @Html.EditorFor(model => model.Soyad)
+            @Html.ValidationMessageFor(model => model.Soyad)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.BolumID)
+            @Html.DropDownList("BolumID", null, "-- Seçiniz --")
+            @Html.ValidationMessageFor(model => model.BolumID)
+        </div>
+        <div>
+            <input type="submit" value="Ekle" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

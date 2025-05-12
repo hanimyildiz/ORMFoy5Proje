@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ORMFoy5.Models.Ogrenci>
+
+<h2>Öğrenci Listesi</h2>
+
+<p>
+    @Html.ActionLink("Yeni Öğrenci Ekle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Bölüm</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Ad)</td>
+            <td>@Html.DisplayFor(modelItem => item.Soyad)</td>
+            <td>@Html.DisplayFor(modelItem => item.Bolum.BolumAd)</td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.OgrenciID }) |
+                @Html.ActionLink("Detaylar", "Details", new { id = item.OgrenciID }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.OgrenciID })
+            </td>
+        </tr>
+    }
+</table>

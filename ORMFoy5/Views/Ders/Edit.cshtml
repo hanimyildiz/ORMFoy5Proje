@@ -1,0 +1,47 @@
+﻿@model ORMFoy5.Models.Ders
+
+@{
+    ViewBag.Title = "Ders Düzenle";
+}
+
+<h2>Ders Düzenle</h2>
+
+@if (Model == null)
+{
+    <p>Hata: Ders bulunamadı.</p>
+    <div>
+        @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.DersID)
+
+        <div class="form-group">
+            <div>
+                @Html.LabelFor(model => model.DersAd, new { @class = "control-label" })
+                @Html.EditorFor(model => model.DersAd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DersAd, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.BolumID, new { @class = "control-label" })
+                @Html.DropDownList("BolumID", (SelectList)ViewBag.BolumID, "-- Seçiniz --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BolumID, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

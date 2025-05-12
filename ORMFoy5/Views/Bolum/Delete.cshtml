@@ -1,0 +1,34 @@
+﻿@model ORMFoy5.Models.Bolum
+
+@{
+    ViewBag.Title = "Bölüm Sil";
+}
+
+<h2>Bölüm Sil</h2>
+
+@if (Model == null)
+{
+    <p>Hata: Bölüm bulunamadı.</p>
+    <div>
+        @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+    </div>
+}
+else
+{
+    <h3>Bölümü silmek istediğinizden emin misiniz?</h3>
+    <div>
+        <p><strong>Bölüm Adı:</strong> @Html.DisplayFor(model => model.BolumAd)</p>
+        <p><strong>Fakülte:</strong> @Html.DisplayFor(model => model.Fakulte.FakulteAd)</p>
+    </div>
+
+    using (Html.BeginForm("Delete", "Bolum", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.BolumID)
+
+        <div>
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+}

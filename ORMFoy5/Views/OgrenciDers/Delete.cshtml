@@ -1,0 +1,33 @@
+﻿@model ORMFoy5.Models.OgrenciDers
+
+@{
+    ViewBag.Title = "Ders Sil";
+}
+
+<h2>Ders Sil</h2>
+
+@if (Model == null)
+{
+    <p>Hata: Kayıt bulunamadı.</p>
+}
+else
+{
+    <h3>Silmek istediğinizden emin misiniz?</h3>
+    <div>
+        <p><strong>Öğrenci:</strong> @Html.DisplayFor(model => model.Ogrenci.Ad)</p>
+        <p><strong>Ders:</strong> @Html.DisplayFor(model => model.Ders.DersAd)</p>
+        <p><strong>Yıl:</strong> @Html.DisplayFor(model => model.Yil)</p>
+        <p><strong>Yarıyıl:</strong> @Html.DisplayFor(model => model.Yariyil)</p>
+    </div>
+
+    using (Html.BeginForm("Delete", "OgrenciDers", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.OgrenciDersID)
+
+        <div>
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+}

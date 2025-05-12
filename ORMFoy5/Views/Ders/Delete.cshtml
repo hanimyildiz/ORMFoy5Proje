@@ -1,0 +1,18 @@
+﻿@model ORMFoy5.Models.Ders
+
+<h2>Ders Sil</h2>
+
+<h3>Bu dersi silmek istediğinizden emin misiniz?</h3>
+<div>
+    <p><strong>Ders Adı:</strong> @Html.DisplayFor(model => model.DersAd)</p>
+    <p><strong>Bölüm:</strong> @Html.DisplayFor(model => model.Bolum.BolumAd)</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ORMFoy5.Models.OgrenciDers>
+
+@{
+    ViewBag.Title = "Kaydedilen Notlar";
+}
+
+<h2>Kaydedilen Notlar</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>Öğrenci Adı</th>
+            <th>Ders Adı</th>
+            <th>Vize Notu</th>
+            <th>Final Notu</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ogrenci.Ad</td>
+                <td>@item.Ders.DersAd</td> 
+                <td>@item.VizeNotu</td>
+                <td>@item.FinalNotu</td>
+            </tr>
+        }
+    </table>
+    <p>@Html.ActionLink("Geri Dön", "Index", "NotGir")</p>
+}
+else
+{
+    <p>Kaydedilecek not bulunamadı.</p>
+}

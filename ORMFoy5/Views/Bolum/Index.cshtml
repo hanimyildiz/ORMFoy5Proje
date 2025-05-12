@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ORMFoy5.Models.Bolum>
+
+@{
+    ViewBag.Title = "Bölüm Listesi";
+}
+
+<h2>Bölüm Listesi</h2>
+
+<p>
+    @Html.ActionLink("Yeni Bölüm Ekle", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Bölüm Adı</th>
+        <th>Fakülte</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.BolumAd)</td>
+            <td>@Html.DisplayFor(modelItem => item.Fakulte.FakulteAd)</td>
+            <td>
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.BolumID }) |
+                @Html.ActionLink("Detaylar", "Details", new { id = item.BolumID }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.BolumID })
+            </td>
+        </tr>
+    }
+</table>

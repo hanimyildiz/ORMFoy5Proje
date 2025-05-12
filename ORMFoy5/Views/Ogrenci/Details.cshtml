@@ -1,0 +1,14 @@
+﻿@model ORMFoy5.Models.Ogrenci
+
+<h2>Öğrenci Detayları</h2>
+
+<div>
+    <p><strong>Ad:</strong> @Html.DisplayFor(model => model.Ad)</p>
+    <p><strong>Soyad:</strong> @Html.DisplayFor(model => model.Soyad)</p>
+    <p><strong>Bölüm:</strong> @Html.DisplayFor(model => model.Bolum.BolumAd)</p>
+</div>
+
+<div>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.OgrenciID }) |
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</div>

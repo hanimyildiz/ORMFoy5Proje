@@ -1,0 +1,36 @@
+﻿@model ORMFoy5.Models.Bolum
+
+@{
+    ViewBag.Title = "Yeni Bölüm Ekle";
+}
+
+<h2>Yeni Bölüm Ekle</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div>
+            @Html.LabelFor(model => model.BolumAd, new { @class = "control-label" })
+            @Html.EditorFor(model => model.BolumAd, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BolumAd, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(model => model.FakulteID, new { @class = "control-label" })
+            @Html.DropDownList("FakulteID", (SelectList)ViewBag.FakulteID, "-- Seçiniz --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FakulteID, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            <input type="submit" value="Ekle" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Listeye Geri Dön", "Index", null, new { @class = "btn btn-default" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
